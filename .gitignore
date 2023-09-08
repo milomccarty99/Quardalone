@@ -1,0 +1,6 @@
+backupscript.sh
+backups/*
+backups/
+source/*.exe
+source/*.sh
+

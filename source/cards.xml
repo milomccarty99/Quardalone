@@ -1,0 +1,31 @@
+<?xml version='1.0' ?>
+<cards>
+  <card>
+    <name>shovel</name>
+    <left>
+      <block>5</block>
+    </left>
+    <right>
+      <attack>5</attack>
+    </right>
+  </card>
+  <card>
+    <name>torch</name>
+    <left>
+      <block>2</block>
+    </left>
+    <right>
+      <attack>7</attack>
+    </right>
+  </card>
+  <card>
+    <name>wand</name>
+    <left>
+      <block>1</block>
+    </left>
+    <right>
+      <attack>2</attack>
+      <antimanticore>7</antimanticore>
+    </right>
+  </card>
+</cards>

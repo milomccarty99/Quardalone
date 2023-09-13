@@ -14,12 +14,14 @@ class MainLoop {
       Console.WriteLine(card.GetName());
       Console.WriteLine(card.GetLeftAction().InnerXml);
     }
+    Console.WriteLine("-----------------------");
+    //Console.WriteLine(Alignment.Detroit.ToString());
     return 0;
   }
 }
 
 class Card {
-  
+
   private String name = "foo";
   private String longname = "foobar";
   private XmlNode leftAction;
@@ -47,7 +49,7 @@ class Card {
       // don't look down
       /*else if (node.Name == "down") {
         this.downAction = node;
-      }*/
+        }*/
     }
   }
 
@@ -55,14 +57,105 @@ class Card {
   {
     return this.name;
   }
-  
+
   public String GetLongname()
   {
     return this.longname;
   }
-  
+
   public XmlNode GetLeftAction()
   {
     return this.leftAction;
+  }
+
+  public XmlNode GetRightAction()
+  {
+    return this.rightAction;
+  }
+
+  public XmlNode GetUpAction()
+  {
+    return this.upAction;
+  }
+
+  public XmlNode GetDownAction()
+  {
+    throw new NotImplementedException();
+  }
+}
+
+public enum Alignment {
+  Fae,
+  Independent,
+  Goblin,
+  PowerHungry,
+  Underground,
+  Detroit,
+  Demon,
+  Imp,
+  Nonce,
+  Ghoul
+}
+
+class Creature {
+  protected int health;
+  protected int maxHealth;
+  protected Alignment align;
+  protected int manaLevel;
+  protected String name;
+
+  public Creature(int health, int maxHealth, String name, Alignment align=Alignment.Independent, int manaLevel=0) {
+    this.health = health;
+    this.maxHealth = maxHealth;
+    this.align = align;
+    this.manaLevel = manaLevel;
+    this.name = name;
+  }
+  public int GetHealth()
+  {
+    return this.health;
+  }
+
+  public int GetMaxHealth()
+  {
+    return this.maxHealth;
+  }
+
+  public Alignment GetAlignment()
+  {
+    return this.align;
+  }
+
+  public int GetManaLevel() {
+    return this.manaLevel;
+  }
+
+  public void ModifyMana(int amount)
+  {
+    this.manaLevel += amount;
+  }
+
+  public float ManaSaturation()
+  {
+    return (manaLevel + 0.0f)/(maxHealth + 0.0f);
+  }
+}
+
+class Enemy : Creature {
+  public Enemy(int health=15):base(health,health,"ig")
+  {
+
+  }
+  
+  public Enemy(int health, int maxHealth, String name, Alignment align = Alignment.Goblin, int manaLevel=0)
+  {
+    throw new NotImplementedException();
+    //add cards
+  }
+
+  public override String ToString()
+  {
+    return "hello, Scum!, my name is " + base.name + "and my health is "
+      + base.health + "out of"+ base.maxHealth;
   }
 }

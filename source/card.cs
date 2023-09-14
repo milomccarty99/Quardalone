@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
@@ -14,19 +15,27 @@ class MainLoop {
     if (dataPath.Length > 0) {
       doc.Load(dataPath);
     }
+    Process fotoViewer = new Process();
+    fotoViewer.StartInfo.FileName = @"open";
+    fotoViewer.StartInfo.Arguments = "quardalone_logo.png";
+    fotoViewer.Start();
+
+    
     /*XmlNodeList cards = doc.GetElementsByTagName("card");
-    foreach (XmlNode cardInfo in cards)
-    {
+      foreach (XmlNode cardInfo in cards)
+      {
       Card card = new Card(cardInfo);
       Console.WriteLine(card.GetName());
       Console.WriteLine(card.GetLeftAction().InnerXml);
-    }*/
+      }*/
     int[] amounts = {2, 2, 1, 5};
     Deck deck = new Deck(doc, amounts);
     deck.FisherYatesShuffle();
+    deck.Draw(6);
+    Console.WriteLine(deck);
     /*Console.WriteLine(deck.DrawOne());
-    Console.WriteLine(deck.DrawOne());
-    Console.WriteLine(deck.DrawOne()); */
+      Console.WriteLine(deck.DrawOne());
+      Console.WriteLine(deck.DrawOne()); */
     Console.WriteLine("-----------------------");
     //Console.WriteLine(Alignment.Detroit.ToString());
     Enemy ig = new Enemy();
@@ -146,18 +155,27 @@ class Deck {
   }
 
   public void Draw(int amount) {
-  while(amount > 0)
-  {
-    if(DrawOne())
-    {}
-    else
+    while(amount > 0)
     {
-      tableDeck = discardPile;
-      discardPile = new List<Card>();
-      FisherYatesShuffle();
-      DrawOne();
+      if(DrawOne())
+      {}
+      else
+      {
+        tableDeck = discardPile;
+        discardPile = new List<Card>();
+        FisherYatesShuffle();
+        DrawOne();
+      }
+      amount--; // naturally goes to 0 if no cards actually drawn
     }
-    amount--; // naturally goes to 0 if no cards actually drawn
+  }
+  public override String ToString() {
+    String ret = "Your hand consists of: ";
+    for (int i = 0; i < hand.Count; i++) {
+      ret += hand[i].ToString();
+    }
+    ret += ". And you have " + tableDeck.Count + " card(s) in your draw pile.";
+    return ret;
   }
 }
 public enum Alignment {
@@ -236,9 +254,3 @@ class Enemy : Creature {
   }
 }
 
-class StateManager {
-  private Creature player = new Creature(100, 100, "<placeholder name>", Alignment.Underground, 0);
-
-
-
-}

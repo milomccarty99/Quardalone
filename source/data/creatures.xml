@@ -1,0 +1,24 @@
+<?xml version='1.0' ?>
+<creatures>
+  <enemy>
+    <name>Ig</name>
+    <health>15</health>
+    <attack>5</attack>
+  </enemy>
+  <shopkeeper>
+    <name>Uraa</name>
+    <cardpack>uraacardpack.xml, shopkeeperpack.xml</cardpack>
+    <aggro-threshold>2</aggro-threshold>
+    <pattern>Right, Right, Left</pattern>
+  </shopkeeper>
+  <shopkeeper>
+    <name>Randy</name>
+    <cardpack>shopkeeperpack.xml</cardpack.xml>
+    <health>50</health>
+    <flataction>
+      <attack>5</attack>
+      <noise><select-random>gah, roh, hyag</select-random></noise>
+    </flataction>
+    <aggro-threshold>25</aggro-threshold>
+  </shopkeeper>
+</creatures>

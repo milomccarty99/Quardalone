@@ -4,7 +4,20 @@
     <name>Ig</name>
     <health>15</health>
     <attack>5</attack>
+    <bathroom>loo</bathroom>
   </enemy>
+  <creature>
+    <name>Dang</name>
+    <type>Chicken</type>
+    <attack>1</attack>
+    <health>1</health>
+  </creature>
+  <creature>
+    <name>Swine</name>
+    <type>Cow</type>
+    <flataction><noise>moo</noise></flataction>
+    <pattern>Left</pattern>
+    <cardpack>cowpack.xml</cardpack>
   <shopkeeper>
     <name>Uraa</name>
     <cardpack>uraacardpack.xml, shopkeeperpack.xml</cardpack>
@@ -21,4 +34,9 @@
     </flataction>
     <aggro-threshold>25</aggro-threshold>
   </shopkeeper>
+  <player>
+    <health>100</health>
+    <action>Agency <noise>whoami</noise></action>
+    
+  </player>
 </creatures>

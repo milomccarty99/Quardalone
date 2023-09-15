@@ -1,0 +1,51 @@
+<?xml version='1.0' ?>
+<cards>
+  <card>
+    <name>shovel</name>
+    <left>
+      <text>Block for 5.</text>
+      <block>5</block>
+    </left>
+    <right>
+      <text>Attack for 5.</text>
+      <attack>5</attack>
+    </right>
+  </card>
+  <card>
+    <name>torch</name>
+    <left>
+      <text>Block for 2.</text>
+      <block>2</block>
+    </left>
+    <right>
+      <text>Attack for 7.</text>
+      <attack>7</attack>
+    </right>
+  </card>
+  <card>
+    <name>wand</name>
+    <left>
+      <text>Block for 1.</text>
+      <block>1</block>
+    </left>
+    <right>
+      <text>Attack for 2. Do 7 additional damage to Manticores.</text>
+      <attack>2</attack>
+      <anticreature>
+        <manticore>7</manticore>
+      </anticreature>
+    </right>
+  </card>
+  <card>
+    <name>pig</name>
+    <left>
+      <text>Block for 3. oink</text>
+      <block>3</block>
+      <noise>oink</noise>
+    </left>
+    <right>
+      <text>Attack for 5</text>
+      <attack>5</attack>
+    </right>
+  </card>
+</cards>

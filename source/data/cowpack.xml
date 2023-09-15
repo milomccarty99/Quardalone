@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<cards>
+  <card>
+    <name>Moo</name>
+    <longname>MooSe</longname>
+    <left>
+      <noise>moo</noise>
+    </left>
+    <right>
+    </right>
+  </card>
+  <card>
+    <name>Headbutt</name>
+    <longname>Zerith</longname>
+    <left>
+      <noise>thud</noise>
+      <attack>5</attack>
+    </left>
+    <up>
+      <dance>bob</dance>
+    </up>
+    <right>
+      <self-attack>20</self-attack>
+    </right>
+  </card>
+  <card>
+    <name>birth</name>
+    <longname>the painful one</longname>
+    <left> 
+      <pet>baby</pet>
+    </left>
+    <right>
+      <attack>throw 5</attack>
+    </right>
+  </card>
+</cards>
+

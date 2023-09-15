@@ -17,18 +17,70 @@ class StateManager {
   protected Deck deck;
   protected CreatureOrganizer co;
 
-  //statei-machine trackers
+  //state-machine trackers
   protected Stack<Direction> playStack; //play cards from here until you cannot
   protected int upCounter; //counts every up (null) action;
-  public StateManager(String xmlCardFilePath, String xmlEnemyFilePath, String playerName,int levels = 5)
+  public StateManager(String xmlCardFilePath, String xmlEnemyFilePath,int[] amounts, String playerName,int levels = 5)
   {
     this.xmlCardFilePath = xmlCardFilePath;
     this.xmlEnemyFilePath = xmlEnemyFilePath;
     this.numLevels = levels;
     this.currentLevel = 0;
-    this.deck = new Deck(xmlCardFilePath);
+    
+    this.deck = new Deck(xmlCardFilePath,amounts);
+    Console.WriteLine(deck);
 
+  }
 
+  public void StartPlayerTurn()
+  {
+    throw new NotImplementedException();
+  }
+
+  public void PlaySelection(int selection)
+  {
+    throw new NotImplementedException();
+  }
+
+  public void GetHand() {
+    throw new NotImplementedException();
+  }
+
+  private bool CheckHandViability()
+  {
+    throw new NotImplementedException();
+  }
+
+  public void EndTurn() {
+    throw new NotImplementedException();
+  }
+
+  private void Mulligan() {
+    throw new NotImplementedException();
+  }
+
+  private void RemainingPlays() {
+    throw new NotImplementedException();
+  }
+  
+  public int GetRemainingCards() {
+    throw new NotImplementedException();
+  }
+
+  public List<Card> ViewTopDraw(int depth) {
+    throw new NotImplementedException();
+  }
+
+  private void ScryTopCards(int depth)
+  {
+    throw new NotImplementedException();
+  }
+
+  private void MagnetRandomCard()
+  {
+    // obtain a copy of a card in your hand and one in your opponents hand
+    // choose to keep one.
+    throw new NotImplementedException();
   }
 
   public bool CheckLevelProgression()
@@ -41,11 +93,16 @@ class StateManager {
     return this.currentLevel;
   }
 
-  public List<Enemy> GetCurrentActiveEnemies() {
+  public List<Enemy> GetCurrentActiveCreatures() {
     throw new NotImplementedException();
   }
   
-  public bool PerformActionToEnemy(XmlNode action, Enemy enemy)
+  public bool PerformActionToCreature(XmlNode action, Creature enemy)
+  {
+    throw new NotImplementedException();
+  }
+
+  public bool PerformActionToManyCreatures(XmlNode action, List<Creature> manyCreatures)
   {
     throw new NotImplementedException();
   }
@@ -106,6 +163,11 @@ class CreatureOrganizer {
   }
 
   public bool SelectRandomEnemy(String name = null) { //just one
+    throw new NotImplementedException();
+  }
+
+  public Creature SelectIndexedCreature(int index)
+  {
     throw new NotImplementedException();
   }
 

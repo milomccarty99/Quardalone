@@ -15,12 +15,18 @@ class MainLoop {
     if (dataPath.Length > 0) {
       doc.Load(dataPath);
     }
+    String xmlCardFilePath = "data/cards.xml";
+    String xmlCreatureFilePath = "data/creatures.xml";
+    int[] amounts = {2, 2, 1, 5};
+    Console.Write("Please enter the player name: ");
+    String playerName = Console.ReadLine();
+    // open a picture :)
     Process fotoViewer = new Process();
     fotoViewer.StartInfo.FileName = @"open";
     fotoViewer.StartInfo.Arguments = "quardalone_logo.png";
     fotoViewer.Start();
 
-    
+    StateManager sm = new StateManager(xmlCardFilePath, xmlCreatureFilePath, amounts, playerName);
     /*XmlNodeList cards = doc.GetElementsByTagName("card");
       foreach (XmlNode cardInfo in cards)
       {

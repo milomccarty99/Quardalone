@@ -45,6 +45,7 @@
     </left>
     <right>
       <text>Attack for 5</text>
+      <forceplay>Right</forceplay>
       <attack>5</attack>
     </right>
   </card>

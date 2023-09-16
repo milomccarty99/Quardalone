@@ -18,6 +18,7 @@
     <flataction><noise>moo</noise></flataction>
     <pattern>Left</pattern>
     <cardpack>cowpack.xml</cardpack>
+  </creature>
   <shopkeeper>
     <name>Uraa</name>
     <cardpack>uraacardpack.xml, shopkeeperpack.xml</cardpack>
@@ -26,7 +27,7 @@
   </shopkeeper>
   <shopkeeper>
     <name>Randy</name>
-    <cardpack>shopkeeperpack.xml</cardpack.xml>
+    <cardpack>shopkeeperpack.xml</cardpack>
     <health>50</health>
     <flataction>
       <attack>5</attack>

@@ -16,19 +16,29 @@ class StateManager {
   protected int currentLevel;
   protected Deck deck;
   protected CreatureOrganizer co;
+  protected Player player;
+
 
   //state-machine trackers
   protected Stack<Direction> playStack; //play cards from here until you cannot
   protected int upCounter; //counts every up (null) action;
-  public StateManager(String xmlCardFilePath, String xmlEnemyFilePath,int[] amounts, String playerName,int levels = 5)
+  public StateManager(String xmlCardFilePath, String xmlOtherCreatureFilePath,int[] amounts, Player player,int levels = 5)
   {
     this.xmlCardFilePath = xmlCardFilePath;
     this.xmlEnemyFilePath = xmlEnemyFilePath;
     this.numLevels = levels;
     this.currentLevel = 0;
-    
-    this.deck = new Deck(xmlCardFilePath,amounts);
-    Console.WriteLine(deck);
+    this.player = player;
+    //we assume some parsing before handing off cardDoc to decka
+    Console.WriteLine("Loading cards.xml cardpack");
+    XmlDocument cardDoc = new XmlDocument();
+    cardDoc.Load(xmlCardFilePath);
+    this.deck = new Deck(cardDoc, amounts);
+    //Console.WriteLine(deck);
+    Console.WriteLine("Loading creatures.xml pack");
+    XmlDocument otherCreatureDoc = new XmlDocument();
+    otherCreatureDoc.Load(xmlOtherCreatureFilePath);
+    co = new CreatureOrganizer(otherCreatureDoc);
 
   }
 
@@ -42,8 +52,23 @@ class StateManager {
     throw new NotImplementedException();
   }
 
-  public void GetHand() {
-    throw new NotImplementedException();
+  public List<Card> GetHand() {
+    return deck.GetHand();
+  }
+
+  public void Draw(int amount)
+  {
+    deck.Draw(amount);
+  }
+
+  public void DrawOne()
+  {
+    this.Draw(1);
+  }
+
+  public List<Creature> GetActiveCreatures()
+  {
+    return co.GetActiveCreatures();
   }
 
   private bool CheckHandViability()
@@ -149,13 +174,23 @@ class StateManager {
 }
 
 class CreatureOrganizer {
-  public CreatureOrganizer(XmlNodeList creatures) {
-    //throw new NotImplementedException();
+  List<Creature> possibleEntities;
+  public CreatureOrganizer(XmlDocument creatures) {
+    possibleEntities = new List<Creature>();
+    XmlNodeList typesOfCreatures = creatures.GetElementsByTagName("enemy"); // only enemy for now...
+    for(int i = 0; i < typesOfCreatures.Count; i++) 
+    {
+      possibleEntities.Add(new Creature(typesOfCreatures[i]));
+    }
+
+
   }
+
+  
 
   public bool IsEnemy(Creature creep) 
   {
-    return creep.GetType().Equals(Enemy);
+    return Enemy.Equals(creep.GetType(),typeof(Enemy));
   }
 
   public bool SelectRandomEnemy(int number,String[] names = null) {
@@ -171,4 +206,8 @@ class CreatureOrganizer {
     throw new NotImplementedException();
   }
 
+  public List<Creature> GetActiveCreatures()
+  {
+    throw new NotImplementedException();
+  }
 }

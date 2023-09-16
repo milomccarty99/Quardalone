@@ -20,13 +20,13 @@ class MainLoop {
     int[] amounts = {2, 2, 1, 5};
     Console.Write("Please enter the player name: ");
     String playerName = Console.ReadLine();
+    Player player = new Player(playerName, Alignment.Independent);
     // open a picture :)
     Process fotoViewer = new Process();
     fotoViewer.StartInfo.FileName = @"open";
     fotoViewer.StartInfo.Arguments = "quardalone_logo.png";
     fotoViewer.Start();
 
-    StateManager sm = new StateManager(xmlCardFilePath, xmlCreatureFilePath, amounts, playerName);
     /*XmlNodeList cards = doc.GetElementsByTagName("card");
       foreach (XmlNode cardInfo in cards)
       {
@@ -34,18 +34,35 @@ class MainLoop {
       Console.WriteLine(card.GetName());
       Console.WriteLine(card.GetLeftAction().InnerXml);
       }*/
-    int[] amounts = {2, 2, 1, 5};
-    Deck deck = new Deck(doc, amounts);
-    deck.FisherYatesShuffle();
-    deck.Draw(6);
-    Console.WriteLine(deck);
     /*Console.WriteLine(deck.DrawOne());
       Console.WriteLine(deck.DrawOne());
       Console.WriteLine(deck.DrawOne()); */
     Console.WriteLine("-----------------------");
-    //Console.WriteLine(Alignment.Detroit.ToString());
-    Enemy ig = new Enemy();
-    Console.WriteLine(ig.ToString());
+    //Console.WriteLine(Alignment.Detroit.To:w
+    //String());
+    //Enemy ig = new Enemy();
+    //Console.WriteLine(ig.ToString());
+    //
+    bool winCon = false;
+    
+    StateManager sm = new StateManager(xmlCardFilePath, xmlCreatureFilePath, amounts, player);
+    sm.Draw(6);
+    while(!winCon)
+    {
+      List<Creature> enemies = sm.GetActiveCreatures();
+      foreach (Enemy nme in enemies) {
+        Console.WriteLine(nme.ToString());
+      }
+      //list cards
+      //draw one
+      sm.DrawOne();
+      List<Card> hand = sm.GetHand();
+      for (int i = 0; i < hand.Count; i++)
+      {
+        Console.WriteLine(hand[i].ToString() + ": " + i + "     ");
+      }
+      String selection = Console.ReadLine();
+    }
     Console.ReadLine();
     return 0;
   }
@@ -175,6 +192,12 @@ class Deck {
       amount--; // naturally goes to 0 if no cards actually drawn
     }
   }
+
+  public List<Card> GetHand()
+  {
+    return this.hand;
+  }
+
   public override String ToString() {
     String ret = "Your hand consists of: ";
     for (int i = 0; i < hand.Count; i++) {
@@ -203,6 +226,7 @@ class Creature {
   protected Alignment align;
   protected int manaLevel;
   protected String name;
+  protected Deck deck;
 
   public Creature(int health, int maxHealth, String name, Alignment align=Alignment.Independent, int manaLevel=0) {
     this.health = health;
@@ -210,6 +234,32 @@ class Creature {
     this.align = align;
     this.manaLevel = manaLevel;
     this.name = name;
+    
+  }
+
+  public Creature(XmlNode xmlNodeInfo)
+  {
+    for (int i = 0; i < xmlNodeInfo.ChildNodes.Count; i++)
+    {
+      XmlNode searchNode = xmlNodeInfo.ChildNodes[i];
+      if(searchNode.Name == "health")
+      {
+        this.health = int.Parse(searchNode.InnerXml);
+        this.maxHealth = health;
+      }
+      else if (searchNode.Name == "maxhealth")
+      {
+        this.maxHealth = int.Parse(searchNode.InnerXml);
+      }
+      else if (searchNode.Name == "alignment")
+      {
+        this.align = Enum.Parse<Alignment>(searchNode.InnerXml);
+      }
+      else if (searchNode.Name == "startingmana")
+      {
+      }
+
+    }
   }
   public int GetHealth()
   {
@@ -219,6 +269,11 @@ class Creature {
   public int GetMaxHealth()
   {
     return this.maxHealth;
+  }
+
+  public String GetName()
+  {
+    return this.name;
   }
 
   public Alignment GetAlignment()
@@ -260,3 +315,10 @@ class Enemy : Creature {
   }
 }
 
+class Player : Creature {
+  public Player(String playerName, Alignment align, int startingHealth = 100):base(startingHealth, startingHealth, playerName, align, 0)
+  {
+
+  }
+
+}

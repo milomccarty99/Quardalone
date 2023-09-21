@@ -8,18 +8,23 @@ class MainLoop {
   public static Random rng = new Random();
 
   public static int Main() {
-
+    // get card XmlDocument
     XmlDocument doc = new XmlDocument();
     doc.Load("data/cards.xml");
-    String dataPath = Console.ReadLine();
+    //optional card path
+    //String dataPath = Console.ReadLine();
     if (dataPath.Length > 0) {
       doc.Load(dataPath);
     }
+    // define actual card paths
     String xmlCardFilePath = "data/cards.xml";
     String xmlCreatureFilePath = "data/creatures.xml";
+    // define amounts
     int[] amounts = {2, 2, 1, 5};
+    // input define player name
     Console.Write("Please enter the player name: ");
     String playerName = Console.ReadLine();
+    //create player object
     Player player = new Player(playerName, Alignment.Independent);
     // open a picture :)
     Process fotoViewer = new Process();
@@ -43,9 +48,13 @@ class MainLoop {
     //Enemy ig = new Enemy();
     //Console.WriteLine(ig.ToString());
     //
+    //
+    //winCon is set to false
     bool winCon = false;
     
+    // instantiate StateManager sm
     StateManager sm = new StateManager(xmlCardFilePath, xmlCreatureFilePath, amounts, player);
+    // draw starting hand
     sm.Draw(6);
     while(!winCon)
     {
@@ -62,6 +71,8 @@ class MainLoop {
         Console.WriteLine(hand[i].ToString() + ": " + i + "     ");
       }
       String selection = Console.ReadLine();
+      //check for wincon TO DO
+      winCon = sm.CheckWin();
     }
     Console.ReadLine();
     return 0;

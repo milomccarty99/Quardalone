@@ -39,19 +39,8 @@ class MainLoop {
       Console.WriteLine(card.GetName());
       Console.WriteLine(card.GetLeftAction().InnerXml);
       }*/
-    /*Console.WriteLine(deck.DrawOne());
-      Console.WriteLine(deck.DrawOne());
-      Console.WriteLine(deck.DrawOne()); */
     Console.WriteLine("-----------------------");
-    //Console.WriteLine(Alignment.Detroit.To:w
-    //String());
-    //Enemy ig = new Enemy();
-    //Console.WriteLine(ig.ToString());
-    //
-    //
-    //winCon is set to false
     bool winCon = false;
-    
     // instantiate StateManager sm
     StateManager sm = new StateManager(xmlCardFilePath, xmlCreatureFilePath, amounts, player);
     // draw starting hand
